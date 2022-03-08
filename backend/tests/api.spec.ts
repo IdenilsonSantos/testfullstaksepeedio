@@ -103,6 +103,16 @@ describe("Url Short", () => {
         expect(response.status).toBe(200);
 
     });
+
+    it('should be delete url by user authenticated ', async () => {
+
+        const response = await request(app)
+        .delete(`${'/url/del/'}${urlId}`)
+        .set("authorization", token);
+
+        expect(response.status).toBe(204);
+
+    });
 });
 
 

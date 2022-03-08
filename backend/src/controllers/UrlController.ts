@@ -74,6 +74,21 @@ export default class UrlController {
 
     }
 
+    static getTopViews = async (req: Request, res: Response): Promise<void> => {
+
+            const url = await Url.find({}).select('-userId').sort({urlViewsCounter : -1}).limit(100);
+
+            if (url) {
+                res.status(200).json(url)
+                return
+            }
+            else {
+                res.status(400).json({ error: 'URL not found' })
+            }
+        
+
+    }
+
     static urlViews = async (req: Request, res: Response): Promise<void> => {
 
         const id  = req.params.id;
@@ -88,6 +103,30 @@ export default class UrlController {
             else {
                 res.status(400).json({ error: 'URL not found' })
             }
+        }
+
+    }
+
+    static delete = async (req: Request, res: Response): Promise<void> => {
+
+        //@ts-ignore
+        let id = res.userId != undefined ? res.userId.id : undefined;
+
+        const urlId = req.params.id;
+
+        if (id) {
+            const url = await Url.findOneAndDelete({ userId: id,  urlShortHash: urlId});
+
+            if (url) {
+                res.status(204).json(url)
+                return
+            }
+            else {
+                res.status(400).json({ error: 'URL not found' })
+            }
+        }
+        else {
+            res.status(400).json({ error: 'Id not Provided' })
         }
 
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1646707363092" clover="3.2.0">
-  <project timestamp="1646707363093" name="All files">
-    <metrics statements="119" coveredstatements="103" conditionals="25" coveredconditionals="16" methods="16" coveredmethods="16" elements="160" coveredelements="135" complexity="0" loc="119" ncloc="119" packages="6" files="10" classes="10"/>
+<coverage generated="1646711052622" clover="3.2.0">
+  <project timestamp="1646711052623" name="All files">
+    <metrics statements="129" coveredstatements="117" conditionals="31" coveredconditionals="20" methods="18" coveredmethods="18" elements="178" coveredelements="155" complexity="0" loc="129" ncloc="129" packages="6" files="10" classes="10"/>
     <package name="src">
       <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.ts" path="D:\Projetos\testfullstaksepeedio\backend\src\app.ts">
@@ -36,9 +36,9 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="66" coveredstatements="51" conditionals="21" coveredconditionals="13" methods="14" coveredmethods="14"/>
+      <metrics statements="75" coveredstatements="64" conditionals="27" coveredconditionals="17" methods="16" coveredmethods="16"/>
       <file name="UrlController.ts" path="D:\Projetos\testfullstaksepeedio\backend\src\controllers\UrlController.ts">
-        <metrics statements="44" coveredstatements="33" conditionals="17" coveredconditionals="11" methods="9" coveredmethods="9"/>
+        <metrics statements="53" coveredstatements="46" conditionals="23" coveredconditionals="15" methods="11" coveredmethods="11"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -67,22 +67,31 @@
         <line num="72" count="1" type="stmt"/>
         <line num="77" count="1" type="stmt"/>
         <line num="79" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="86" count="0" type="stmt"/>
-        <line num="88" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="89" count="0" type="stmt"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="100" count="1" type="stmt"/>
+        <line num="81" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="97" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="98" count="1" type="stmt"/>
+        <line num="100" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="101" count="1" type="stmt"/>
         <line num="102" count="1" type="stmt"/>
-        <line num="104" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="105" count="1" type="stmt"/>
-        <line num="107" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="108" count="1" type="stmt"/>
-        <line num="109" count="1" type="stmt"/>
-        <line num="112" count="0" type="stmt"/>
-        <line num="117" count="1" type="stmt"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="111" count="1" type="stmt"/>
+        <line num="114" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="116" count="1" type="stmt"/>
+        <line num="118" count="1" type="stmt"/>
+        <line num="120" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="121" count="1" type="stmt"/>
+        <line num="123" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="124" count="1" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="136" count="1" type="stmt"/>
       </file>
       <file name="UserController.ts" path="D:\Projetos\testfullstaksepeedio\backend\src\controllers\UserController.ts">
         <metrics statements="22" coveredstatements="18" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="5"/>
@@ -117,13 +126,13 @@
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="7" count="4" type="stmt"/>
-        <line num="9" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="9" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="12" count="0" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
         <line num="25" count="2" type="stmt"/>
       </file>
@@ -146,9 +155,9 @@
       </file>
     </package>
     <package name="src.routes">
-      <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="url.ts" path="D:\Projetos\testfullstaksepeedio\backend\src\routes\url.ts">
-        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -157,7 +166,8 @@
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
       </file>
       <file name="user.ts" path="D:\Projetos\testfullstaksepeedio\backend\src\routes\user.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
