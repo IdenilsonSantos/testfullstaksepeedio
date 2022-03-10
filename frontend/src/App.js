@@ -1,9 +1,5 @@
-function App() {
-  return (
-    <div className="App">
-     1
-    </div>
-  );
-}
+import RoutesApp from './routes';
+
+const App = () => <RoutesApp />;
 
 export default App;
