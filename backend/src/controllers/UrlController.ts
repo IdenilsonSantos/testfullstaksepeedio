@@ -1,133 +1,90 @@
-import { NextFunction, Request, Response } from "express";
-import { ObjectID } from 'mongodb'
+import { Request, Response, NextFunction } from "express";
+import { ObjectID } from "mongodb";
 import { nanoid } from "nanoid";
 import "dotenv/config";
 
 import Url from "../models/Url";
 
-export interface IUrl {
-    urlOrigin: String,
-    urlShort: String,
-    urlShortHash: String,
-    urlTitle: String,
-    urlViewsCounter?: 0,
-    userId: Object
-}
-
 export default class UrlController {
-    static store = async (req: Request, res: Response,) => {
+  static store = async (req: Request, res: Response) => {
+    //@ts-ignore
+    let id = res.userId != undefined ? res.userId.id : undefined;
 
-        //@ts-ignore
-        let id = res.userId != undefined ? res.userId.id : undefined
+    const { urlOrigin, urlTitle } = req.body;
 
-        const { urlOrigin, urlTitle } = req.body;
+    const hash = await nanoid(5);
+    const shortUrl = `${"http://localhost:3000"}/${hash}`;
 
-        const hash = await nanoid(5);
-        const shortUrl = `${'http://localhost:3000'}/${hash}`;
+    try {
+      const url = await Url.findOne({ urlOrigin: urlOrigin });
 
+      if (!url) {
+        const data = await Url.create({
+          urlOrigin,
+          urlShort: shortUrl,
+          urlShortHash: hash,
+          urlTitle,
+          urlViewsCounter: 0,
+          urlFavorite: false,
+          userId: new ObjectID(id),
+        });
 
-        try {
-            const url = await Url.findOne({ urlOrigin: urlOrigin });
-
-            if (!url) {
-                await Url.create({
-                    urlOrigin,
-                    urlShort: shortUrl,
-                    urlShortHash: hash,
-                    urlTitle,
-                    urlViewsCounter: 0,
-                    userId: new ObjectID(id)
-                });
-
-                res.status(201).json({ shortUrl, hash, message: 'Url shortned' })
-                return
-            }
-            else {
-                res.status(200).json({ message: 'Url already shortned' })
-            }
-        }
-        catch (error) {
-            return error
-        }
-
+        res.status(201).json({ data, message: "Url shortned" });
+        return;
+      } else {
+        res.status(200).json({ message: "Url already shortned" });
+      }
+    } catch (error) {
+      return res.status(200).json({ message: "Url already shortned" });
     }
+  };
 
-    static getByUser = async (req: Request, res: Response): Promise<void> => {
+  static getTopViews = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const url = await Url.find({})
+        .select("-userId")
+        .sort({ urlViewsCounter: -1 })
+        .limit(100);
 
-        //@ts-ignore
-        let id = res.userId != undefined ? res.userId.id : undefined
-
-        if (id) {
-            const url = await Url.find({ userId: id });
-
-            if (url) {
-                res.status(200).json(url)
-                return
-            }
-            else {
-                res.status(400).json({ error: 'URL not found' })
-            }
-        }
-        else {
-            res.status(400).json({ error: 'Id not Provided' })
-        }
-
+      res.status(200).json(url);
+      return;
+    } catch (err) {
+      res.status(400).json({ error: "URL not found" });
     }
+  };
 
-    static getTopViews = async (req: Request, res: Response): Promise<void> => {
+  static urlViews = async (req: Request, res: Response): Promise<void> => {
+    const id = req.params.id;
 
-            const url = await Url.find({}).select('-userId').sort({urlViewsCounter : -1}).limit(100);
-
-            if (url) {
-                res.status(200).json(url)
-                return
-            }
-            else {
-                res.status(400).json({ error: 'URL not found' })
-            }
-        
-
+    if (id) {
+      try {
+        const url = await Url.findOneAndUpdate(
+          { urlShortHash: id },
+          { $inc: { urlViewsCounter: 1 } },
+          { new: true }
+        );
+        res.status(200).json(url);
+        return;
+      } catch (error) {
+        res.status(400).json({ error: "URL not found" });
+      }
+      res.status(400).json({ message: "Id not provided" });
     }
+  };
 
-    static urlViews = async (req: Request, res: Response): Promise<void> => {
+  static redirect = async (req: Request, res: Response, next: NextFunction) => {
+    const hash = req.params.hash;
+    let url;
 
-        const id  = req.params.id;
-
-        if (id) {
-            const url = await Url.findOneAndUpdate({ urlShortHash: id }, { $inc: {'urlViewsCounter': 1 } }, {new: true });
-
-            if (url) {
-                res.status(200).json(url)
-                return
-            }
-            else {
-                res.status(400).json({ error: 'URL not found' })
-            }
-        }
-
+    try {
+      url = await Url.findOne({ urlShortHash: hash });
+      if (url) {
+        return res.redirect(url.urlOrigin);
+      } else {
+        return res.status(404).json("No url found");
+      }
+    } catch (err: any) {
+      return res.status(500).json("Server Error");
     }
-
-    static delete = async (req: Request, res: Response): Promise<void> => {
-
-        //@ts-ignore
-        let id = res.userId != undefined ? res.userId.id : undefined;
-
-        const urlId = req.params.id;
-
-        if (id) {
-            const url = await Url.findOneAndDelete({ userId: id,  urlShortHash: urlId});
-
-            if (url) {
-                res.status(204).json(url)
-                return
-            }
-            else {
-                res.status(400).json({ error: 'URL not found' })
-            }
-        }
-        else {
-            res.status(400).json({ error: 'Id not Provided' })
-        }
-
-    }
+  };
 }

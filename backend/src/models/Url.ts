@@ -6,6 +6,7 @@ const UrlSchema: Schema = new Schema({
   urlShortHash: { type: String, required: true },
   urlTitle: { type: String, required: true },
   urlViewsCounter: { type: Number, required: false },
+  urlFavorite: { type: Boolean, required: false },
   userId: [{ type: Schema.Types.ObjectId, ref: 'User', required: false }]
 }, { timestamps: true });
 

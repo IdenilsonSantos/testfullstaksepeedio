@@ -6,7 +6,7 @@ export const checkToken = (req: Request, res: Response, next: NextFunction) => {
 
   const token = <string>req.headers["authorization"];
 
-  if (token) {
+  if (token !== undefined) {
     jwt.verify(token, secret, (error, decoded) => {
         if (error) {
             return res.status(404).json({
